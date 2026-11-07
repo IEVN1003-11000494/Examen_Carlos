@@ -1,0 +1,16 @@
+<div class="p-4 max-w-5xl mx-auto font-sans bg-gray-50 min-h-screen">
+  <h1 class="text-center text-3xl font-black mb-6 text-gray-800">Sistema de Pizzería</h1>
+  
+  <div class="w-full mb-4">
+    <app-captura-datos></app-captura-datos>
+  </div>
+
+  <div class="flex gap-4 h-[400px]">
+    <div class="w-7/12">
+      <app-detalle-pedido [formularioCliente]="formularioPrincipal"></app-detalle-pedido>
+    </div>
+    <div class="w-5/12">
+      <app-resumen-ventas></app-resumen-ventas>
+    </div>
+  </div>
+</div>

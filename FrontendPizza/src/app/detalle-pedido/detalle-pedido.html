@@ -1,0 +1,29 @@
+<div class="border-4 border-blue-500 bg-blue-100 p-4 h-full flex flex-col justify-between shadow-md">
+  <div class="bg-white border border-gray-400 h-64 overflow-y-auto mb-4 p-2">
+    <table class="w-full text-center text-sm">
+      <thead class="border-b-2 border-gray-400">
+        <tr>
+          <th class="py-1">Tamaño</th>
+          <th class="py-1">Ingredientes</th>
+          <th class="py-1">Num. Pizzas</th>
+          <th class="py-1">SubTotal</th>
+          <th class="py-1">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pizza of pizzas; let i = index" class="border-b border-gray-200">
+          <td class="py-2">{{ pizza.tamano }}</td>
+          <td class="py-2">{{ pizza.ingredientes }}</td>
+          <td class="py-2">{{ pizza.cantidad }}</td>
+          <td class="py-2 font-bold">${{ pizza.subtotal }}</td>
+          <td><button (click)="quitarPizza(i)" class="bg-gray-300 border border-gray-500 px-2 py-1 text-xs hover:bg-red-400 hover:text-white transition">Quitar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="flex justify-between items-center px-4">
+    <button (click)="terminarPedido()" class="bg-gray-200 border border-gray-500 px-6 py-2 font-bold shadow hover:bg-gray-300">Terminar</button>
+    <div class="font-bold text-lg">Total: ${{ totalPedido }}</div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="border-4 border-yellow-400 p-4 bg-gray-200 h-full overflow-y-auto rounded-md">
+  
+  <div class="flex gap-4 mb-4 justify-center items-center">
+    <label><input type="radio" name="vista" value="dia" [(ngModel)]="vista" (change)="cambiarVista('dia')"> Por Día</label>
+    <label><input type="radio" name="vista" value="mes" [(ngModel)]="vista" (change)="cambiarVista('mes')"> Por Mes</label>
+  </div>
+
+  <div *ngIf="vista === 'dia'" class="flex gap-2 mb-4">
+    <input type="date" class="border p-1 flex-1" [(ngModel)]="fechaFiltro">
+    <button class="bg-gray-300 px-4 py-1 border border-gray-400 font-bold" (click)="consultar()">Buscar</button>
+  </div>
+
+  <div *ngIf="vista === 'mes'" class="flex gap-2 mb-4">
+    <select class="border p-1 flex-1" [(ngModel)]="mesFiltro">
+      <option value="">Mes...</option>
+      <option value="01">Enero</option><option value="02">Febrero</option>
+      <option value="03">Marzo</option><option value="04">Abril</option>
+      <option value="05">Mayo</option><option value="06">Junio</option>
+      <option value="07">Julio</option><option value="08">Agosto</option>
+      <option value="09">Septiembre</option><option value="10">Octubre</option>
+      <option value="11">Noviembre</option><option value="12">Diciembre</option>
+    </select>
+    <input type="text" class="border p-1 w-20" [(ngModel)]="anioFiltro" placeholder="Año">
+    <button class="bg-gray-300 px-4 py-1 border border-gray-400 font-bold" (click)="consultar()">Buscar</button>
+  </div>
+
+  <hr class="border-gray-400 mb-4">
+
+ 
+  <div *ngIf="!ventaSeleccionada">
+    <div *ngFor="let v of ventas" class="mb-2 text-center text-lg">
+      <span class="font-bold">{{ v.cliente }}</span> total <span class="font-bold">${{ v.total }}</span>
+      <button class="ml-2 text-sm text-blue-600 underline" (click)="verDetalles(v)">Ver Detalle</button>
+    </div>
+
+    <div class="mt-6 text-center text-xl font-black" *ngIf="ventas.length > 0">
+      Ventas totales del {{ vista === 'dia' ? 'día' : 'mes' }}: ${{ totalVentas }}
+    </div>
+    
+    <div *ngIf="ventas.length === 0" class="text-center text-gray-500 mt-4">
+      No hay resultados.
+    </div>
+  </div>
+
+ 
+  <div *ngIf="ventaSeleccionada" class="bg-white p-3 border border-gray-400">
+    <h3 class="font-bold text-lg mb-1">Desglose de: {{ ventaSeleccionada.cliente }}</h3>
+  
+    <p class="text-sm text-gray-700 font-semibold mb-2">Fecha de compra: {{ ventaSeleccionada.fecha }}</p>
+    
+    <table class="w-full text-sm text-center mb-3">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="border px-1 py-1">Tamaño</th>
+          <th class="border px-1 py-1">Ingredientes</th>
+          <th class="border px-1 py-1">Cant.</th>
+          <th class="border px-1 py-1">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pizza of ventaSeleccionada.detalles">
+          <td class="border px-1 py-1">{{ pizza.tamano }}</td>
+          <td class="border px-1 py-1">{{ pizza.ingredientes }}</td>
+          <td class="border px-1 py-1">{{ pizza.cantidad }}</td>
+          <td class="border px-1 py-1">${{ pizza.subtotal }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="text-right font-bold mb-2">Total de este pedido: ${{ ventaSeleccionada.total }}</div>
+    <button class="bg-gray-300 w-full py-1 border border-gray-400 font-bold" (click)="cerrarDetalles()">Regresar a las ventas</button>
+  </div>
+
+</div>

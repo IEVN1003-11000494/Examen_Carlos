@@ -1,0 +1,34 @@
+<div class="border-4 border-red-500 p-4 bg-blue-200 shadow-md">
+  <form [formGroup]="formulario">
+    <!-- Fila 1: Cliente -->
+    <div class="flex flex-wrap justify-between gap-2 mb-6">
+      <div><label class="font-bold text-sm">Nombre:</label><input type="text" formControlName="cliente" class="border p-1 ml-2 w-48"></div>
+      <div><label class="font-bold text-sm">Dirección:</label><input type="text" formControlName="direccion" class="border p-1 ml-2 w-48"></div>
+      <div><label class="font-bold text-sm">Teléfono:</label><input type="text" formControlName="telefono" class="border p-1 ml-2 w-32"></div>
+      <div><label class="font-bold text-sm">Fecha:</label><input type="date" formControlName="fecha_pedido" class="border p-1 ml-2 w-32"></div>
+    </div>
+
+    <!-- Fila 2: Pizza -->
+    <div class="flex justify-between items-start">
+      <div>
+        <h3 class="font-bold mb-2 text-sm">Tamaño Pizza</h3>
+        <label class="block text-sm"><input type="radio" formControlName="tamano" value="Chica"> Chica $40</label>
+        <label class="block text-sm"><input type="radio" formControlName="tamano" value="Mediana"> Mediana $80</label>
+        <label class="block text-sm"><input type="radio" formControlName="tamano" value="Grande"> Grande $120</label>
+      </div>
+
+      <div>
+        <h3 class="font-bold mb-2 text-sm">Ingredientes</h3>
+        <label class="block text-sm"><input type="checkbox" formControlName="jamon"> Jamón $10</label>
+        <label class="block text-sm"><input type="checkbox" formControlName="pina"> Piña $10</label>
+        <label class="block text-sm"><input type="checkbox" formControlName="champinones"> Champiñones $10</label>
+      </div>
+
+      <div class="flex flex-col items-center">
+        <label class="font-bold text-sm mb-1">Num. de Pizzas:</label>
+        <input type="number" formControlName="cantidad" class="border p-1 w-16 text-center mb-4">
+        <button type="button" (click)="agregarPizza()" class="bg-gray-200 border border-gray-400 px-6 py-1 font-bold shadow hover:bg-gray-300">Agregar</button>
+      </div>
+    </div>
+  </form>
+</div>
