@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { PizzeriaService } from '../pizzeria';
+import { PizzeriaapiService } from '../pizzeriaapi.service';
 import { DetallePizza } from '../pedido';
 
 @Component({
@@ -14,7 +14,7 @@ export class CapturaDatosComponent implements OnInit {
   formulario!: FormGroup;
   preciosTamano: any = { Chica: 40, Mediana: 80, Grande: 120 };
 
-  constructor(private fb: FormBuilder, private pizzeriaService: PizzeriaService) {}
+  constructor(private fb: FormBuilder, private pizzeriaService: PizzeriaapiService) {}
 
   ngOnInit(): void {
     const fechaHoy = new Date().toISOString().split('T')[0];
@@ -49,10 +49,10 @@ export class CapturaDatosComponent implements OnInit {
       subtotal: subtotal
     };
 
-    // Esto añade la pizza a la lista visual de la tabla azul al instante
+   
     this.pizzeriaService.agregarPizzaTemporal(nuevaPizza);
     
-    // Reseteamos solo los campos de la pizza, manteniendo los datos del cliente
+
     this.formulario.patchValue({ tamano: 'Chica', jamon: false, pina: false, champinones: false, cantidad: 1 });
   }
 }

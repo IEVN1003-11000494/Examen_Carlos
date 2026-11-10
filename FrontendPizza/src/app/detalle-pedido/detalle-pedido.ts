@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PizzeriaService } from '../pizzeria';
+import { PizzeriaapiService } from '../pizzeriaapi.service';
 import { DetallePizza, Pedido } from '../pedido';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -17,15 +17,14 @@ export class DetallePedidoComponent implements OnInit, OnDestroy {
   totalPedido: number = 0;
   private sub!: Subscription;
 
-  // Inyectamos ChangeDetectorRef para controlar el renderizado de la pantalla
-  constructor(private pizzeriaService: PizzeriaService, private cdr: ChangeDetectorRef) {}
+ 
+  constructor(private pizzeriaService: PizzeriaapiService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.sub = this.pizzeriaService.pizzas$.subscribe(pizzas => {
       this.pizzas = [...pizzas];
       this.totalPedido = this.pizzas.reduce((acc, pizza) => acc + pizza.subtotal, 0);
-      
-      // ESTA LÍNEA ES LA SOLUCIÓN: Obliga a Angular a redibujar el recuadro azul de inmediato
+   
       this.cdr.detectChanges(); 
     });
   }

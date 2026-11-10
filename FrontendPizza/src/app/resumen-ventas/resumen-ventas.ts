@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PizzeriaService } from '../pizzeria';
+import { PizzeriaapiService } from '../pizzeriaapi.service';
 
 @Component({
   standalone: true,
@@ -20,7 +20,7 @@ export class ResumenVentasComponent {
 
   ventaSeleccionada: any = null; 
 
-  constructor(private pizzeriaService: PizzeriaService) {}
+  constructor(private pizzeriaService: PizzeriaapiService) {}
 
   cambiarVista(v: 'dia' | 'mes') { 
     this.vista = v; 

@@ -1,3 +1,4 @@
+// src/app/pizzeriaapi.service.ts
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -6,10 +7,9 @@ import { Pedido, DetallePizza } from './pedido';
 @Injectable({
   providedIn: 'root'
 })
-export class PizzeriaService {
+export class PizzeriaapiService {
   private apiUrl = 'http://127.0.0.1:5001/api';
 
- 
   private pizzasSource = new BehaviorSubject<DetallePizza[]>([]);
   public pizzas$ = this.pizzasSource.asObservable();
 
